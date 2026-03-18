@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannabis Medicinal · Espaço Sativo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --verde: #2d5a3d; --verde-claro: #4a8c5c; --verde-suave: #a8c5a0;
+    --creme: #f5f0e8; --creme-escuro: #e8e0d0; --dourado: #c9a96e; --texto: #1e2d24;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--creme); font-family: 'DM Sans', sans-serif; color: var(--texto); }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(245,240,232,0.96); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--creme-escuro);
+    display: flex; justify-content: center; padding: 0 20px;
+  }
+  .nav-inner {
+    max-width: 680px; width: 100%; height: 50px;
+    display: flex; align-items: center; gap: 6px; overflow-x: auto;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-back {
+    font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--verde-claro); text-decoration: none; white-space: nowrap;
+    display: flex; align-items: center; gap: 5px;
+    border-right: 1px solid var(--creme-escuro); padding-right: 14px; margin-right: 6px; flex-shrink: 0;
+  }
+  .nav-back:hover { color: var(--verde); }
+  nav a.sec {
+    font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--verde-claro); text-decoration: none; white-space: nowrap;
+    padding: 4px 2px; transition: color 0.2s;
+  }
+  nav a.sec:hover { color: var(--verde); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--verde); padding: 48px 20px 44px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06); top: -200px; right: -120px;
+  }
+  .hero::after {
+    content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04); bottom: -100px; left: -80px;
+  }
+
+  .hero-logo {
+    width: 100%; max-width: 240px; margin-bottom: 24px; position: relative; z-index: 1;
+  }
+  .hero-logo img { width: 100%; height: auto; display: block; filter: brightness(0) invert(1); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px; font-weight: 300; color: white; line-height: 1.1;
+    position: relative; z-index: 1;
+  }
+  .hero h1 em { font-style: italic; color: var(--verde-suave); }
+  .hero p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-style: italic; color: rgba(255,255,255,0.55);
+    margin-top: 10px; max-width: 340px; line-height: 1.6; position: relative; z-index: 1;
+  }
+
+  /* ── PILLS ── */
+  .pills {
+    display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+    padding: 20px; max-width: 680px; margin: 0 auto;
+  }
+  .pill {
+    font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--verde); background: white; border: 1px solid var(--creme-escuro);
+    padding: 7px 14px; border-radius: 20px; text-decoration: none; transition: all 0.2s;
+  }
+  .pill:hover { background: var(--verde); color: white; border-color: var(--verde); }
+
+  /* ── SECTIONS ── */
+  section { max-width: 680px; margin: 0 auto; padding: 40px 20px 8px; }
+  .section-label {
+    font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--verde-claro); margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 300; color: var(--verde); line-height: 1.2; margin-bottom: 20px;
+  }
+
+  /* ── PRIMEIROS PASSOS (conteúdo do ebook) ── */
+  .passos-grid { display: flex; flex-direction: column; gap: 10px; }
+
+  .passo-card {
+    background: white; border: 1px solid var(--creme-escuro); border-radius: 3px;
+    overflow: hidden; box-shadow: 0 2px 8px rgba(45,90,61,0.06);
+  }
+  .passo-q {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 16px 20px; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--verde);
+    transition: background 0.15s;
+  }
+  .passo-q:hover { background: #f9f6f0; }
+  .passo-toggle { color: var(--dourado); font-size: 22px; flex-shrink: 0; transition: transform 0.25s; }
+  .passo-q.open .passo-toggle { transform: rotate(45deg); }
+
+  .passo-body {
+    display: none; padding: 0 20px 18px; border-top: 1px solid var(--creme-escuro);
+  }
+  .passo-body.show { display: block; }
+  .passo-body ul { padding-left: 16px; margin-top: 14px; }
+  .passo-body li { font-size: 13px; color: #5a7060; line-height: 1.75; margin-bottom: 8px; }
+  .passo-body li strong { color: var(--verde); font-weight: 500; }
+  .passo-body p { font-size: 13px; color: #5a7060; line-height: 1.75; margin-top: 14px; }
+  .passo-body .nota {
+    margin-top: 12px; padding: 10px 14px;
+    background: var(--creme); border-left: 3px solid var(--dourado);
+    border-radius: 0 2px 2px 0; font-size: 12px; color: #7a9070; font-style: italic;
+  }
+
+  /* ── ASSOCIAÇÕES ── */
+  .regiao-titulo {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600;
+    color: var(--verde); margin: 28px 0 14px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--creme-escuro);
+  }
+  .estado-grupo { margin-bottom: 20px; }
+  .estado-titulo {
+    font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dourado); margin-bottom: 10px;
+  }
+  .assoc-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+  .assoc-tag {
+    background: white; border: 1px solid var(--creme-escuro); border-radius: 2px;
+    padding: 7px 13px; font-size: 12px; color: var(--verde);
+    text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;
+  }
+  .assoc-tag:hover { border-color: var(--verde-suave); background: #f0f7f2; }
+  .assoc-tag.link::after { content: ' ↗'; font-size: 10px; color: var(--dourado); margin-left: 2px; }
+
+  /* ── AUDIOVISUAL ── */
+  .av-card {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: white; border: 1px solid var(--creme-escuro); border-radius: 3px;
+    padding: 16px 18px; margin-bottom: 8px; text-decoration: none;
+    transition: all 0.2s; box-shadow: 0 2px 8px rgba(45,90,61,0.05);
+  }
+  .av-card:hover { border-color: var(--verde-suave); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(45,90,61,0.1); }
+  .av-icon {
+    width: 38px; height: 38px; border-radius: 50%; background: var(--creme);
+    border: 1px solid var(--creme-escuro); display: flex; align-items: center;
+    justify-content: center; font-size: 17px; flex-shrink: 0;
+  }
+  .av-info { flex: 1; }
+  .av-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--verde); }
+  .av-desc { font-size: 11px; color: #8aa090; margin-top: 3px; line-height: 1.4; }
+  .av-plat { font-size: 9px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dourado); margin-top: 5px; }
+  .av-arrow { color: var(--dourado); font-size: 18px; flex-shrink: 0; align-self: center; margin-left: 8px; }
+
+  /* ── IMPORTADORES ── */
+  .import-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+  .import-card {
+    background: white; border: 1px solid var(--creme-escuro); border-radius: 3px;
+    padding: 14px 16px; text-decoration: none; display: flex;
+    align-items: center; justify-content: space-between; transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(45,90,61,0.04);
+  }
+  .import-card:hover { border-color: var(--verde-suave); transform: translateY(-1px); }
+  .import-name { font-size: 13px; font-weight: 500; color: var(--verde); }
+  .import-arrow { color: var(--dourado); font-size: 14px; }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 60px; background: var(--verde); padding: 24px 20px;
+    text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  footer a {
+    font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s;
+  }
+  footer a:hover { color: rgba(255,255,255,0.8); }
+  footer p { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: rgba(255,255,255,0.3); }
+
+  @media (max-width: 500px) {
+    .hero h1 { font-size: 34px; }
+    .import-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-back" href="https://e-sativo.github.io">← Início</a>
+    <a class="sec" href="#primeiros-passos">Primeiros passos</a>
+    <a class="sec" href="#associacoes">Associações</a>
+    <a class="sec" href="#audiovisual">Audiovisual</a>
+    <a class="sec" href="#importadores">Importadores</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">
+    <img src="../logo.svg" alt="Espaço Sativo">
+  </div>
+  <h1>Cannabis<br><em>Medicinal</em></h1>
+  <p>Informação acessível para quem busca o caminho desta medicina milenar</p>
+</div>
+
+<!-- PILLS -->
+<div class="pills">
+  <a class="pill" href="#primeiros-passos">🌱 Primeiros passos</a>
+  <a class="pill" href="#associacoes">🌿 Associações</a>
+  <a class="pill" href="#audiovisual">🎬 Audiovisual</a>
+  <a class="pill" href="#importadores">📦 Importadores</a>
+</div>
+
+<!-- PRIMEIROS PASSOS -->
+<section id="primeiros-passos">
+  <div class="section-title">Primeiros passos com a cannabis medicinal</div>
+  <p style="font-size:13px; color:#7a9080; font-style:italic; margin-bottom:20px;">Dúvidas sobre produtos a base de cannabis? Nada melhor que o empoderamento.</p>
+
+  <div class="passos-grid">
+
+    <div class="passo-card">
+      <div class="passo-q" onclick="togglePasso(this)">
+        Onde posso comprar?
+        <span class="passo-toggle">+</span>
+      </div>
+      <div class="passo-body">
+        <ul>
+          <li><strong>Farmácias</strong> — já estão disponíveis alguns produtos, principalmente isolados ricos em canabidiol. Têm pronta entrega e certificado de análise, porém a custo mais alto.</li>
+          <li><strong>Associações</strong> — o associativismo é responsável pelo grande aumento no acesso. Podem ser mais acessíveis, mas com concentrações variáveis entre lotes.</li>
+          <li><strong>Importados</strong> — empresas com representação de marcas consagradas do exterior, que oferecem certificado de análise e suporte jurídico para a importação.</li>
+        </ul>
+        <div class="nota">Garantia de qualidade, preço e frete são as variáveis que precisamos avaliar em cada caso.</div>
+      </div>
+    </div>
+
+    <div class="passo-card">
+      <div class="passo-q" onclick="togglePasso(this)">
+        Qual o preço do tratamento?
+        <span class="passo-toggle">+</span>
+      </div>
+      <div class="passo-body">
+        <p>Uma referência prática é o índice de <strong><a href="https://veja.abril.com.br/coluna/cannabiz/medicamentos-nacionais-de-cannabis-nao-sao-mais-baratos-que-os-importados/" target="_blank" rel="noopener" style="color:var(--verde);text-decoration:underline;text-underline-offset:3px;">valor em reais por mg de cannabinoide</a></strong>, que simplifica a comparação entre produtos de diferentes fornecedores.</p>
+        <div class="nota">Sinta-se livre para tomar a sua decisão com base nas suas necessidades, acessibilidade e orientação médica.</div>
+      </div>
+    </div>
+
+    <div class="passo-card">
+      <div class="passo-q" onclick="togglePasso(this)">
+        Como iniciar o tratamento?
+        <span class="passo-toggle">+</span>
+      </div>
+      <div class="passo-body">
+        <ul>
+          <li><strong>Iniciar</strong> — siga a prescrição e evite fazer mais de uma intervenção ao mesmo tempo.</li>
+          <li><strong>Dose</strong> — aumente gradualmente. A máxima da cannabis medicinal: <em>inicie baixo, mantenha baixo e siga baixo.</em></li>
+          <li><strong>Monitoramento</strong> — anote os resultados positivos e negativos num calendário para conversar conosco.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ASSOCIAÇÕES -->
+<section id="associacoes">
+  <div class="section-title">Associações Cannábicas no Brasil</div>
+  <p style="font-size:13px; color:#7a9080; font-style:italic; margin-bottom:4px;">Organizadas por regiões. Associações com site têm link direto (↗).</p>
+
+  <!-- NORTE -->
+  <div class="regiao-titulo">Norte</div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">RO — Rondônia</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">ACAMERO</span>
+      <span class="assoc-tag">Assoc. Canábica de Ji-Paraná</span>
+    </div>
+  </div>
+
+  <!-- NORDESTE -->
+  <div class="regiao-titulo">Nordeste</div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">CE — Ceará</div>
+    <div class="assoc-grid">
+      <a class="assoc-tag link" href="https://www.abracam.org/" target="_blank">ABRACAM</a>
+      <a class="assoc-tag link" href="https://acurabr.com.br/" target="_blank">Acura</a>
+      <span class="assoc-tag">Adapta</span>
+      <span class="assoc-tag">Amece</span>
+      <span class="assoc-tag">SATIVOTECA</span>
+      <span class="assoc-tag">Flor de Kaneh</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">PB — Paraíba</div>
+    <div class="assoc-grid">
+      <a class="assoc-tag link" href="https://abraceesperanca.org.br/home/" target="_blank">ABRACE</a>
+      <span class="assoc-tag">AMPARA</span>
+      <span class="assoc-tag">LIGA CANÁBICA</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">PE — Pernambuco</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">AMME</span>
+      <span class="assoc-tag">CANNAPE</span>
+      <span class="assoc-tag">Coletivo Mães Independentes</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">SE — Sergipe</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">ABACCANS</span>
+    </div>
+  </div>
+
+  <!-- CENTRO-OESTE -->
+  <div class="regiao-titulo">Centro-Oeste</div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">GO — Goiás</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">ACALME — Luz Medicinal</span>
+      <span class="assoc-tag">Instituto Kannè</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">MS — Mato Grosso do Sul</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">Divina Flor</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">MT — Mato Grosso</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">Mov. Mães Canábicas de Rondonópolis</span>
+    </div>
+  </div>
+
+  <!-- SUDESTE -->
+  <div class="regiao-titulo">Sudeste</div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">SP — São Paulo</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">ABRACUCA</span>
+      <span class="assoc-tag">Acalme Brasil</span>
+      <span class="assoc-tag">ACAMPA</span>
+      <span class="assoc-tag">ACUCASEMA</span>
+      <span class="assoc-tag">ACuCa</span>
+      <span class="assoc-tag">ACCURA</span>
+      <span class="assoc-tag">Assoc. Padre Ticão</span>
+      <span class="assoc-tag">Assoc. Canábica Campinas</span>
+      <a class="assoc-tag link" href="https://cultive.org.br/a-cultive-associacao/" target="_blank">CULTIVE</a>
+      <span class="assoc-tag">FLOR DA VIDA</span>
+      <a class="assoc-tag link" href="https://www.maleli.org.br/" target="_blank">MALÉLI</a>
+      <span class="assoc-tag">PRÓ-VIDA</span>
+      <a class="assoc-tag link" href="https://sbec.med.br/" target="_blank">SBEC / Mães Jardineiras</a>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">RJ — Rio de Janeiro</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">Assoc. Dr Hemp</span>
+      <span class="assoc-tag">Mãesconha</span>
+      <span class="assoc-tag">AMACANNABIS</span>
+      <a class="assoc-tag link" href="https://abrario.org/" target="_blank">Abrario</a>
+      <a class="assoc-tag link" href="https://www.apepi.org/" target="_blank">APEPI</a>
+      <span class="assoc-tag">Assoc. Humanitária Canábica</span>
+      <span class="assoc-tag">Canapse</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">MG — Minas Gerais</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">ACMT — Triângulo Mineiro</span>
+      <span class="assoc-tag">Flor de Cannabis Medicinal</span>
+      <span class="assoc-tag">AMA+ME</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">ES — Espírito Santo</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">Coletivo ES Cannabis Medicinal</span>
+    </div>
+  </div>
+
+  <!-- SUL -->
+  <div class="regiao-titulo">Sul</div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">PR — Paraná</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">ACANPA</span>
+      <span class="assoc-tag">ACASF</span>
+      <span class="assoc-tag">FLORESCER</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">RS — Rio Grande do Sul</div>
+    <div class="assoc-grid">
+      <span class="assoc-tag">ACS Porto Alegre</span>
+      <span class="assoc-tag">Agapec Pelotas</span>
+    </div>
+  </div>
+  <div class="estado-grupo">
+    <div class="estado-titulo">SC — Santa Catarina</div>
+    <div class="assoc-grid">
+      <a class="assoc-tag link" href="https://associacaoalternativa.com.br/" target="_blank">ALTERNATIVA</a>
+      <a class="assoc-tag link" href="https://santacannabis.com.br/" target="_blank">SANTA CANNABIS</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- AUDIOVISUAL -->
+<section id="audiovisual">
+  <div class="section-label">Curadoria de conteúdo</div>
+  <div class="section-title">Audiovisual em destaque</div>
+
+  <a class="av-card" href="https://www.youtube.com/results?search_query=MovReCam+UNIFESP" target="_blank" rel="noopener">
+    <div class="av-icon">🎓</div>
+    <div class="av-info">
+      <div class="av-title">MovReCam — UNIFESP</div>
+      <div class="av-desc">Curso gratuito de extensão sobre cannabis medicinal</div>
+      <div class="av-plat">YouTube · Gratuito</div>
+    </div>
+    <div class="av-arrow">→</div>
+  </a>
+
+  <a class="av-card" href="https://www.youtube.com/results?search_query=Curando+Ivo+Alzheimer+cannabis" target="_blank" rel="noopener">
+    <div class="av-icon">🎬</div>
+    <div class="av-info">
+      <div class="av-title">Curando Ivo</div>
+      <div class="av-desc">Relato da jornada do Seu Ivo, portador de Alzheimer</div>
+      <div class="av-plat">YouTube · Documentário</div>
+    </div>
+    <div class="av-arrow">→</div>
+  </a>
+
+  <a class="av-card" href="https://www.netflix.com" target="_blank" rel="noopener">
+    <div class="av-icon">🎥</div>
+    <div class="av-info">
+      <div class="av-title">Baseado em Fatos Raciais</div>
+      <div class="av-desc">Documentário sobre raça, cannabis e políticas públicas</div>
+      <div class="av-plat">Netflix</div>
+    </div>
+    <div class="av-arrow">→</div>
+  </a>
+
+  <a class="av-card" href="https://www.youtube.com/results?search_query=O+Cientista+Raphael+Mechoulam" target="_blank" rel="noopener">
+    <div class="av-icon">🔬</div>
+    <div class="av-info">
+      <div class="av-title">O Cientista</div>
+      <div class="av-desc">Documentário sobre o Dr. Raphael Mechoulam, candidato ao Nobel</div>
+      <div class="av-plat">YouTube · Documentário</div>
+    </div>
+    <div class="av-arrow">→</div>
+  </a>
+
+    <a class="av-card" href="https://www.youtube.com/watch?app=desktop&v=0kCZN_zjzGA" target="_blank" rel="noopener">
+    <div class="av-icon">🧠</div>
+    <div class="av-info">
+      <div class="av-title">Parkinson e Cannabis</div>
+      <div class="av-desc">Relato de capitão de polícia aposentado com mais de 19 anos de diagnóstico com a doença de Parkinson</div>
+      <div class="av-plat">YouTube · Documentário</div>
+    </div>
+    <div class="av-arrow">→</div>
+  </a>
+
+  <a class="av-card" href="https://www.youtube.com/results?search_query=Dirijo+cannabis+indigena" target="_blank" rel="noopener">
+    <div class="av-icon">🌿</div>
+    <div class="av-info">
+      <div class="av-title">Dirijo</div>
+      <div class="av-desc">Relatos indígenas sobre o uso tradicional da planta</div>
+      <div class="av-plat">YouTube · Documentário</div>
+    </div>
+    <div class="av-arrow">→</div>
+  </a>
+</section>
+
+<!-- IMPORTADORES -->
+<section id="importadores">
+  <div class="section-title">Empresas importadoras</div>
+  <p style="font-size:13px; color:#7a9080; font-style:italic; margin-bottom:20px;">Com certificado de análise e suporte jurídico para importação.</p>
+  <div class="import-grid">
+    <a class="import-card" href="https://cannect.life/" target="_blank" rel="noopener">
+      <span class="import-name">Cannect</span><span class="import-arrow">↗</span>
+    </a>
+    <a class="import-card" href="https://canteramed.com/" target="_blank" rel="noopener">
+      <span class="import-name">Canteramed</span><span class="import-arrow">↗</span>
+    </a>
+    <a class="import-card" href="https://farmausa.com/" target="_blank" rel="noopener">
+      <span class="import-name">Farmausa</span><span class="import-arrow">↗</span>
+    </a>
+    <a class="import-card" href="https://hempmedsbr.com/" target="_blank" rel="noopener">
+      <span class="import-name">HempMeds BR</span><span class="import-arrow">↗</span>
+    </a>
+    <a class="import-card" href="https://www.usahempbrasil.com/" target="_blank" rel="noopener">
+      <span class="import-name">USA Hemp Brasil</span><span class="import-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://e-sativo.github.io">← Voltar ao Espaço Sativo</a>
+  <p>Espaço Sativo · Cannabis Medicinal 🌿</p>
+</footer>
+
+<script>
+  function togglePasso(el) {
+    el.classList.toggle('open');
+    el.nextElementSibling.classList.toggle('show');
+  }
+</script>
+</body>
+</html>
