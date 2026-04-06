@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cannabis Medicinal · Espaço Sativo</title>
+<title>Cannabis Medicinal · espaço sativo</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --verde: #2d5a3d; --verde-claro: #4a8c5c; --verde-suave: #a8c5a0;
-    --creme: #f5f0e8; --creme-escuro: #e8e0d0; --dourado: #c9a96e; --texto: #1e2d24;
+    --verde: #2d5a3d; --verde2: #3d7a4a; --verde-claro: #4a8c5c;
+    --verde-suave: #a8c5a0; --creme: #f5f0e8; --creme-escuro: #e8e0d0;
+    --dourado: #c9a96e; --dourado-esc: #a07c40; --texto: #1e2d24; --cinza: #6a8a72;
   }
   html { scroll-behavior: smooth; }
   body { background: var(--creme); font-family: 'DM Sans', sans-serif; color: var(--texto); }
@@ -21,10 +22,7 @@
     border-bottom: 1px solid var(--creme-escuro);
     display: flex; justify-content: center; padding: 0 20px;
   }
-  .nav-inner {
-    max-width: 680px; width: 100%; height: 50px;
-    display: flex; align-items: center; gap: 6px; overflow-x: auto;
-  }
+  .nav-inner { max-width: 720px; width: 100%; height: 50px; display: flex; align-items: center; gap: 6px; overflow-x: auto; }
   .nav-inner::-webkit-scrollbar { display: none; }
   .nav-back {
     font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
@@ -35,235 +33,197 @@
   .nav-back:hover { color: var(--verde); }
   nav a.sec {
     font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--verde-claro); text-decoration: none; white-space: nowrap;
-    padding: 4px 2px; transition: color 0.2s;
+    color: var(--verde-claro); text-decoration: none; white-space: nowrap; padding: 4px 6px; transition: color 0.2s;
   }
   nav a.sec:hover { color: var(--verde); }
 
   /* ── HERO ── */
   .hero {
-    background: var(--verde); padding: 48px 20px 44px;
+    background: var(--verde); padding: 52px 20px 44px;
     display: flex; flex-direction: column; align-items: center; text-align: center;
     position: relative; overflow: hidden;
   }
-  .hero::before {
-    content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.06); top: -200px; right: -120px;
+  .hero::before { content:""; position:absolute; width:500px; height:500px; border-radius:50%; border:1px solid rgba(255,255,255,0.06); top:-200px; right:-120px; }
+  .hero::after  { content:""; position:absolute; width:300px; height:300px; border-radius:50%; border:1px solid rgba(255,255,255,0.04); bottom:-100px; left:-80px; }
+  .hero-logo { width: 100%; max-width: 240px; margin-bottom: 22px; position: relative; z-index: 1; }
+  .hero-logo img { width: 100%; height: auto; display: block; }
+  .hero-badge {
+    display: inline-block; background: rgba(201,169,110,0.2); border: 1px solid rgba(201,169,110,0.4);
+    color: var(--dourado); font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 2px; margin-bottom: 16px; position: relative; z-index: 1;
   }
-  .hero::after {
-    content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.04); bottom: -100px; left: -80px;
-  }
-
-  .hero-logo {
-    width: 100%; max-width: 240px; margin-bottom: 24px; position: relative; z-index: 1;
-  }
-  .hero-logo img { width: 100%; height: auto; display: block; filter: brightness(0) invert(1); }
-
   .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 44px; font-weight: 300; color: white; line-height: 1.1;
-    position: relative; z-index: 1;
+    font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300;
+    color: white; line-height: 1.05; position: relative; z-index: 1;
   }
   .hero h1 em { font-style: italic; color: var(--verde-suave); }
-  .hero p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; font-style: italic; color: rgba(255,255,255,0.55);
-    margin-top: 10px; max-width: 340px; line-height: 1.6; position: relative; z-index: 1;
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic;
+    color: rgba(255,255,255,0.55); margin-top: 10px; max-width: 380px; line-height: 1.6; position: relative; z-index: 1;
   }
 
-  /* ── PILLS ── */
-  .pills {
-    display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
-    padding: 20px; max-width: 680px; margin: 0 auto;
-  }
-  .pill {
-    font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--verde); background: white; border: 1px solid var(--creme-escuro);
-    padding: 7px 14px; border-radius: 20px; text-decoration: none; transition: all 0.2s;
-  }
-  .pill:hover { background: var(--verde); color: white; border-color: var(--verde); }
+  /* ── SEÇÕES ── */
+  section { max-width: 720px; margin: 0 auto; padding: 36px 20px 0; }
+  .sec-label { font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--verde-claro); margin-bottom: 6px; }
+  .sec-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--verde); line-height: 1.2; margin-bottom: 16px; }
 
-  /* ── SECTIONS ── */
-  section { max-width: 680px; margin: 0 auto; padding: 40px 20px 8px; }
-  .section-label {
-    font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--verde-claro); margin-bottom: 6px;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 30px; font-weight: 300; color: var(--verde); line-height: 1.2; margin-bottom: 20px;
-  }
-
-  /* ── PRIMEIROS PASSOS (conteúdo do ebook) ── */
-  .passos-grid { display: flex; flex-direction: column; gap: 10px; }
-
-  .passo-card {
+  /* ── HUB CARDS (links principais) ── */
+  .hub-card {
+    display: flex; align-items: stretch;
     background: white; border: 1px solid var(--creme-escuro); border-radius: 3px;
-    overflow: hidden; box-shadow: 0 2px 8px rgba(45,90,61,0.06);
+    text-decoration: none; margin-bottom: 10px;
+    box-shadow: 0 2px 12px rgba(45,90,61,0.07);
+    transition: transform 0.2s, box-shadow 0.2s; overflow: hidden;
   }
-  .passo-q {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 16px 20px; cursor: pointer;
-    font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--verde);
-    transition: background 0.15s;
-  }
-  .passo-q:hover { background: #f9f6f0; }
-  .passo-toggle { color: var(--dourado); font-size: 22px; flex-shrink: 0; transition: transform 0.25s; }
-  .passo-q.open .passo-toggle { transform: rotate(45deg); }
+  .hub-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(45,90,61,0.13); }
+  .hub-accent { width: 5px; flex-shrink: 0; }
+  .card-assoc .hub-accent  { background: var(--verde); }
+  .card-audio .hub-accent  { background: var(--dourado); }
+  .card-import .hub-accent { background: var(--verde2); }
+  .hub-body { flex: 1; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .hub-label { font-size: 9px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 3px; }
+  .card-assoc .hub-label  { color: var(--verde-claro); }
+  .card-audio .hub-label  { color: var(--dourado-esc); }
+  .card-import .hub-label { color: var(--verde2); }
+  .hub-title { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; color: var(--verde); line-height: 1.15; }
+  .hub-desc { font-size: 11px; color: #8aa090; margin-top: 3px; line-height: 1.4; }
+  .hub-arrow { font-size: 20px; flex-shrink: 0; }
+  .card-assoc .hub-arrow  { color: var(--verde); }
+  .card-audio .hub-arrow  { color: var(--dourado); }
+  .card-import .hub-arrow { color: var(--verde2); }
 
-  .passo-body {
-    display: none; padding: 0 20px 18px; border-top: 1px solid var(--creme-escuro);
+  /* ── ACCORDION (primeiros passos) ── */
+  .accordion { display: flex; flex-direction: column; gap: 0; }
+  .acc-item { border: 1px solid var(--creme-escuro); border-radius: 3px; background: white; margin-bottom: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(45,90,61,0.04); }
+  .acc-trigger {
+    width: 100%; background: none; border: none; cursor: pointer;
+    padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600;
+    color: var(--verde); text-align: left; transition: background 0.15s;
   }
-  .passo-body.show { display: block; }
-  .passo-body ul { padding-left: 16px; margin-top: 14px; }
-  .passo-body li { font-size: 13px; color: #5a7060; line-height: 1.75; margin-bottom: 8px; }
-  .passo-body li strong { color: var(--verde); font-weight: 500; }
-  .passo-body p { font-size: 13px; color: #5a7060; line-height: 1.75; margin-top: 14px; }
-  .passo-body .nota {
-    margin-top: 12px; padding: 10px 14px;
-    background: var(--creme); border-left: 3px solid var(--dourado);
-    border-radius: 0 2px 2px 0; font-size: 12px; color: #7a9070; font-style: italic;
-  }
+  .acc-trigger:hover { background: var(--creme); }
+  .acc-icon { font-size: 13px; color: var(--dourado); transition: transform 0.25s; flex-shrink: 0; }
+  .acc-trigger[aria-expanded="true"] .acc-icon { transform: rotate(45deg); }
+  .acc-body { display: none; padding: 0 20px 18px; }
+  .acc-body.aberto { display: block; }
+  .acc-body p { font-size: 13px; color: var(--cinza); line-height: 1.7; margin-bottom: 10px; }
+  .acc-body p:last-child { margin-bottom: 0; }
+  .acc-body ul { padding-left: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .acc-body li { font-size: 13px; color: var(--cinza); line-height: 1.6; }
+  .acc-body li strong { color: var(--texto); }
+  .acc-body li em { font-style: italic; color: var(--texto); }
+  .acc-body a { color: var(--verde-claro); }
 
-  /* ── ASSOCIAÇÕES ── */
-  .regiao-titulo {
-    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600;
-    color: var(--verde); margin: 28px 0 14px; padding-bottom: 8px;
-    border-bottom: 2px solid var(--creme-escuro);
-  }
-  .estado-grupo { margin-bottom: 20px; }
-  .estado-titulo {
-    font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--dourado); margin-bottom: 10px;
-  }
-  .assoc-grid { display: flex; flex-wrap: wrap; gap: 7px; }
-  .assoc-tag {
-    background: white; border: 1px solid var(--creme-escuro); border-radius: 2px;
-    padding: 7px 13px; font-size: 12px; color: var(--verde);
-    text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center;
-  }
-  .assoc-tag:hover { border-color: var(--verde-suave); background: #f0f7f2; }
-  .assoc-tag.link::after { content: ' ↗'; font-size: 10px; color: var(--dourado); margin-left: 2px; }
-
-  /* ── AUDIOVISUAL ── */
-  .av-card {
-    display: flex; align-items: flex-start; gap: 14px;
+  /* ── CARDS DE AUDIOVISUAL ── */
+  .audio-grid { display: flex; flex-direction: column; gap: 8px; }
+  .audio-card {
     background: white; border: 1px solid var(--creme-escuro); border-radius: 3px;
-    padding: 16px 18px; margin-bottom: 8px; text-decoration: none;
-    transition: all 0.2s; box-shadow: 0 2px 8px rgba(45,90,61,0.05);
+    display: flex; align-items: stretch; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(45,90,61,0.05); text-decoration: none;
+    transition: box-shadow 0.2s, transform 0.2s;
   }
-  .av-card:hover { border-color: var(--verde-suave); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(45,90,61,0.1); }
-  .av-icon {
-    width: 38px; height: 38px; border-radius: 50%; background: var(--creme);
-    border: 1px solid var(--creme-escuro); display: flex; align-items: center;
-    justify-content: center; font-size: 17px; flex-shrink: 0;
+  .audio-card:hover { box-shadow: 0 4px 16px rgba(45,90,61,0.1); transform: translateY(-1px); }
+  .audio-num {
+    width: 52px; background: var(--verde); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 16px 0; align-self: stretch; flex-shrink: 0;
   }
-  .av-info { flex: 1; }
-  .av-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--verde); }
-  .av-desc { font-size: 11px; color: #8aa090; margin-top: 3px; line-height: 1.4; }
-  .av-plat { font-size: 9px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dourado); margin-top: 5px; }
-  .av-arrow { color: var(--dourado); font-size: 18px; flex-shrink: 0; align-self: center; margin-left: 8px; }
+  .audio-num span { font-size: 22px; line-height: 1; }
+  .audio-info { flex: 1; padding: 14px 16px; }
+  .audio-plat { font-size: 8px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--dourado-esc); margin-bottom: 3px; }
+  .audio-titulo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--verde); line-height: 1.2; }
+  .audio-desc { font-size: 11px; color: var(--cinza); margin-top: 3px; line-height: 1.5; }
+  .audio-acao { padding: 0 16px; display: flex; align-items: center; flex-shrink: 0; }
+  .audio-btn {
+    font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 8px 14px; border-radius: 2px; background: white; color: var(--verde);
+    border: 1px solid var(--creme-escuro); white-space: nowrap;
+  }
 
   /* ── IMPORTADORES ── */
-  .import-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+  .import-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
   .import-card {
     background: white; border: 1px solid var(--creme-escuro); border-radius: 3px;
-    padding: 14px 16px; text-decoration: none; display: flex;
-    align-items: center; justify-content: space-between; transition: all 0.2s;
+    padding: 16px 18px; text-decoration: none; display: flex; align-items: center;
+    justify-content: space-between; gap: 8px;
     box-shadow: 0 2px 8px rgba(45,90,61,0.04);
+    transition: box-shadow 0.2s, transform 0.2s;
   }
-  .import-card:hover { border-color: var(--verde-suave); transform: translateY(-1px); }
-  .import-name { font-size: 13px; font-weight: 500; color: var(--verde); }
-  .import-arrow { color: var(--dourado); font-size: 14px; }
+  .import-card:hover { box-shadow: 0 4px 16px rgba(45,90,61,0.1); transform: translateY(-1px); }
+  .import-nome { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--verde); }
+  .import-arrow { font-size: 14px; color: var(--verde-claro); flex-shrink: 0; }
 
   /* ── FOOTER ── */
-  footer {
-    margin-top: 60px; background: var(--verde); padding: 24px 20px;
-    text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;
-  }
-  footer a {
-    font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s;
-  }
+  footer { margin-top: 60px; background: var(--verde); padding: 24px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  footer a { font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; }
   footer a:hover { color: rgba(255,255,255,0.8); }
-  footer p { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: rgba(255,255,255,0.3); }
+  footer p { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: rgba(255,255,255,0.35); }
 
   @media (max-width: 500px) {
-    .hero h1 { font-size: 34px; }
+    .hero h1 { font-size: 38px; }
     .import-grid { grid-template-columns: 1fr 1fr; }
+    .audio-acao { display: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-back" href="https://e-sativo.github.io">← Início</a>
-    <a class="sec" href="#primeiros-passos">Primeiros passos</a>
-    <a class="sec" href="#associacoes">Associações</a>
-    <a class="sec" href="#audiovisual">Audiovisual</a>
-    <a class="sec" href="#importadores">Importadores</a>
+    <a class="nav-back" href="https://e-sativo.github.io">← início</a>
+    <a class="sec" href="#primeiros-passos">🌱 Primeiros passos</a>
+    <a class="sec" href="#associacoes">🌿 Associações</a>
+    <a class="sec" href="#audiovisual">🎬 Audiovisual</a>
+    <a class="sec" href="#importadores">📦 Importadores</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-logo">
-    <img src="../logo.svg" alt="Espaço Sativo">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHdpZHRoPSIxMjA0LjM3MXB4IiBoZWlnaHQ9IjY5MC43NDFweCIgdmlld0JveD0iMCAwIDEyMDQuMzcxIDY5MC43NDEiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEyMDQuMzcxIDY5MC43NDEiCgkgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGc+CgkJPGc+CgkJCTxyZWN0IHg9IjM0OC42MTMiIHk9IjMzNi4wNCIgZmlsbD0id2hpdGUiIHdpZHRoPSI5LjY1NyIgaGVpZ2h0PSI5MC4zODkiLz4KCQkJPGc+CgkJCQk8cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTMwMy42NiwzNzUuMjk2QzMwMy42NTksMzc1LjI5NiwzMDMuNjYsMzc1LjI5NiwzMDMuNjYsMzc1LjI5NmMtMzkuNjU4LDAtNjMuNTIyLTM5LjE0NS02NC41Mi00MC44MTEKCQkJCQlsLTIuNTk0LTQuMzM4bDQuNzc1LTEuNjU0YzE1LjY5MS01LjQzNiwzMC40MTMtOC4xODksNDMuNzU3LTguMTg5YzI0LjQ2NCwwLDQwLjI0NCw5LjI5Myw0OS4xNzUsMTcuMDg4CgkJCQkJYzkuNzcyLDguNTMzLDEzLjY4NywxNy4xMzEsMTMuODQ5LDE3LjQ5NGwxLjM3MywzLjA2OGwtMi43MzksMS45NTNDMzMyLjQxOCwzNzAuMTE2LDMxNy45MjQsMzc1LjI5NiwzMDMuNjYsMzc1LjI5NnoKCQkJCQkgTTI0OS4xNDQsMzM0LjU2OWM3LjE1Miw5LjcxNywyNi44NzksMzIuNTA4LDU0LjUxNywzMi41MWMxMS41NDEsMCwyMy4zOTQtMy45NjUsMzUuMjgtMTEuNzg3CgkJCQkJYy0xLjc5OS0yLjg2OS01LjEzNi03LjQ0NS0xMC4zOTMtMTEuOTcxYy0xMS40MS05LjgyLTI2LjAzNi0xNC44MDEtNDMuNDY5LTE0LjgwMQoJCQkJCUMyNzQuMDk5LDMyOC41MjEsMjYyLjAzMiwzMzAuNTU0LDI0OS4xNDQsMzM0LjU2OXoiLz4KCQkJPC9nPgoJCQk8Zz4KCQkJCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNMzUxLjE4LDM1Ny41MDNjMCwwLTEwLjI0LTE2LjA3Mi00OC41MTItOS44NjNDMzAyLjY2OCwzNDcuNjQsMzIxLjA4NCwzNjkuMDgxLDM1MS4xOCwzNTcuNTAzeiIvPgoJCQk8L2c+CgkJCTxnPgoJCQkJPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0zNDkuNzczLDM0OS4xNzNsLTEuMzk0LTMuMzAzYy05LjQwNS0yMi4yODUtMTAuMDIxLTQyLjcyNy0xLjgzMi02MC43NTQKCQkJCQljMTQuNjA0LTMyLjE1MSw1MS43NDItNDQuNzI1LDUzLjMxNi00NS4yNDNsNS4xMTQtMS42ODhsMC42MDcsNS4zNTFjNS4zNzYsNDcuMjQ5LTguOTEsNzMuMjEtMjEuODM5LDg2LjY3MQoJCQkJCWMtMTQuMjQzLDE0LjgyNC0yOS44MDgsMTguMTIxLTMwLjQ2MiwxOC4yNTJMMzQ5Ljc3MywzNDkuMTczeiBNMzk3LjQ0NCwyNTAuMjU2Yy0xMC4yNDQsNC40OTgtMzMsMTYuNTc5LTQyLjk0NSwzOC41MzIKCQkJCQljLTYuNjc2LDE0LjczOC02LjUwNywzMS41NTksMC40OTUsNTAuMDQzYzQuODktMS43MzIsMTQuMTc4LTUuOTU1LDIyLjc4MS0xNS4wNTcKCQkJCQlDMzkzLjI3OCwzMDcuMzc0LDQwMC4wMzUsMjgyLjAzNywzOTcuNDQ0LDI1MC4yNTZ6Ii8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTM1My4xOTYsMzM4Ljk3NGMwLDAsMTguMjQ4LTUuNDkyLDIyLjY1OC00NC4wMTRDMzc1Ljg1NCwyOTQuOTYsMzUwLjIyMSwzMDYuODY2LDM1My4xOTYsMzM4Ljk3NHoiLz4KCQkJPC9nPgoJCTwvZz4KCQk8Zz4KCQkJPGc+CgkJCQk8Zz4KCQkJCQk8Zz4KCQkJCQkJPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0zNjAuMTIyLDU1NS42NTFjLTExNS45NDgsMC0yMTAuMjc3LTk0LjMzNi0yMTAuMjc3LTIxMC4yODNjMC0zLjkwNiwwLjEwOC03Ljc5MSwwLjMxNy0xMS42NQoJCQkJCQkJYzAuMTU1LTIuODgzLDIuNjA2LTUuMDc2LDUuNS00LjkzYzIuODgxLDAuMTUyLDUuMDg5LDIuNjE1LDQuOTM0LDUuNDk4Yy0wLjIsMy42NjgtMC4yOTksNy4zNjMtMC4yOTksMTEuMDgyCgkJCQkJCQljMCwxMTAuMTg5LDg5LjY0MSwxOTkuODMyLDE5OS44MjYsMTk5LjgzMmMxMTAuMTg0LDAsMTk5LjgyNy04OS42NDMsMTk5LjgyNy0xOTkuODMyYzAtMTEwLjE4Ni04OS42NDMtMTk5LjgzLTE5OS44MjctMTk5LjgzCgkJCQkJCQljLTkyLjA3NiwwLTE3MS44MzUsNjIuMzMtMTkzLjk2MywxNTEuNTc0Yy0wLjY5NiwyLjgwMS0zLjUzLDQuNTA0LTYuMzMsMy44MTRjLTIuODAxLTAuNjkzLTQuNTA3LTMuNTI3LTMuODE0LTYuMzI4CgkJCQkJCQljMjMuMjg4LTkzLjkxNywxMDcuMjE4LTE1OS41MDksMjA0LjEwNy0xNTkuNTA5YzExNS45NDUsMCwyMTAuMjc3LDk0LjMzMywyMTAuMjc3LDIxMC4yNzgKCQkJCQkJCUM1NzAuMzk5LDQ2MS4zMTUsNDc2LjA2Nyw1NTUuNjUxLDM2MC4xMjIsNTU1LjY1MXoiLz4KCQkJCQk8L2c+CgkJCQkJPGc+CgkJCQkJCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNNDM4LjkyNCw1MzkuOTYyYy0wLjE4LDAtMC4zNjItMC4wMDYtMC41NDMtMC4wMjdjLTIuODctMC4yOTctNC45NTctMi44NjMtNC42NjItNS43MwoJCQkJCQkJYzMuOTM3LTM4LjE3OC0zLjM5Ni02Ni4yMjMtMjEuNzk0LTgzLjM1N2MtMjcuNzA3LTI1LjgwMS03MS43MjUtMTguNDM0LTcyLjE2NC0xOC4zNTdjLTAuMjk5LDAuMDUzLTAuNTk4LDAuMDgtMC45MDMsMC4wOAoJCQkJCQkJYy0yNC4xNTEsMC00NC4wMjQtMTEuNDUzLTU5Ljk5NS0yMC42NTZjLTQuNjcxLTIuNjkxLTkuMDg0LTUuMjM2LTEyLjk3MS03LjA5NGMtNi4xNDYtMi45MzYtMTAuODQ1LTMuNjYyLTEyLjU3OS0xLjkzCgkJCQkJCQljLTIuMzk5LDIuNDA4LTEuNzE4LDkuOTM0LTAuMzU5LDEyLjc1OGMxMi43MTMsMjYuNDAyLDM1Ljk4MSwzMC41OTIsNTIuOTcxLDMzLjY1MmM5Ljg1OSwxLjc3MywxNy42NDgsMy4xNzgsMjEuMTM5LDguODEzCgkJCQkJCQljMy4wMjUsNC44OTEsMS42NTYsOC41NjMsMC41NjgsMTAuMzIyYy00LjM0Miw3LjAwMi0xOC43NjEsNi43NjQtMjYuOTY3LDYuMDEyYy03MS41MDItOS4yMjktOTQuMDY4LTU5LjgzNC0xMTIuMTk4LTEwMC40OTYKCQkJCQkJCWMtNi4yOC0xNC4wOC0xMi4yMTEtMjcuMzgxLTE5LjM2OC0zNi43ODVjLTQuMDEzLTUuMjctNi4zMjUtNi42NjItNy4xNjMtNy4wMjNjLTAuNTk1LDAuODgzLTEuMjE3LDIuOTktMS4zNjIsNC4zOTEKCQkJCQkJCWMtMC4yOTQsMi44NzMtMi44MTcsNC45NjUtNS43Myw0LjY2OGMtMi44NjgtMC4yOTUtNC45NTctMi44NTktNC42NjYtNS43MjljMC4xOTYtMS45LDEuNTM0LTExLjQ4Miw4Ljg3NC0xMy41NDkKCQkJCQkJCWM3LjM5OS0yLjA5MiwxNC4wMzQsNS4yMjcsMTguMzY0LDEwLjkxOGM3Ljg5MSwxMC4zNjUsMTQuMDYxLDI0LjIwMSwyMC41OTIsMzguODU0CgkJCQkJCQljMTcuOTU4LDQwLjI3LDM4LjMwOSw4NS45MTIsMTAzLjgwOCw5NC4zNjdjNi4xNDYsMC41NTcsMTMuMDcxLDAuMTYyLDE2LjAwOC0wLjgzMmMtMS44NC0xLjUwMi04LjY2NS0yLjczLTEzLjc1MS0zLjY0OAoJCQkJCQkJYy0xOC4xMjItMy4yNjQtNDUuNTA3LTguMTkzLTYwLjUzNC0zOS40Yy0yLjQ0Ni01LjA3Mi00LjMzNi0xNy45MzYsMi4zNzYtMjQuNjY4YzUuMjk1LTUuMzEzLDEzLjUzMS01LjM1NSwyNC40ODUtMC4xMjEKCQkJCQkJCWM0LjI0OCwyLjAzMyw4LjgzLDQuNjcyLDEzLjY4LDcuNDY3YzE0Ljc5LDguNTI3LDMzLjE3OSwxOS4xMjEsNTQuMzU0LDE5LjI2YzUuNDU3LTAuODYzLDUwLjQ1My03LjAwOCw4MC42MTEsMjEuMDg0CgkJCQkJCQljMjAuOTE5LDE5LjQ4MiwyOS4zNTMsNTAuNDY1LDI1LjA2NSw5Mi4wNzJDNDQzLjgzNyw1MzcuOTY0LDQ0MS41NjYsNTM5Ljk2Miw0MzguOTI0LDUzOS45NjJ6Ii8+CgkJCQkJPC9nPgoJCQkJCTxnPgoJCQkJCQk8cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTE1Mi41NTIsMzMyLjgwMmMwLDAtMC40OSwwLjU4OCwwLDIuNTUxYzAuNDkzLDEuOTY1LDMuNTM1LTEuMjc3LDMuNTM1LTEuMjc3bC0xLjAxNy0yLjI1OAoJCQkJCQkJTDE1Mi41NTIsMzMyLjgwMnoiLz4KCQkJCQk8L2c+CgkJCQk8L2c+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik02OTUuMzI0LDM4Ny45MDNjLTUuMjE1LTIuNTA4LTEwLjU2OC0zLjc2Ni0xNi4wNjMtMy43NjZjLTQuMTg4LDAtNy45MTMsMC43NDQtMTEuMTczLDIuMjMyCgkJCQljLTQuMDk4LDEuOTU5LTYuMDk3LDQuNjU4LTYuMDA0LDguMTAyYzAuMDkzLDQuNDcxLDMuMzk2LDcuNzI5LDkuOTE2LDkuNzc5YzYuMTQ0LDEuODU5LDEyLjI0MSwzLjcyMywxOC4yOTYsNS41ODYKCQkJCWM2LjYwOSwzLjE2MiwxMC4wMDksOC4zNzcsMTAuMTk1LDE1LjY0MWMwLjE4Niw2LjE0MS0yLjk4MiwxMS44NjktOS40OTgsMTcuMTc2Yy0zLjgxOCwzLjE2OC05LjI2Niw1LjU5LTE2LjMzOSw3LjI2NgoJCQkJYy02LjA1MywxLjM5My0xMi4xNTIsMi4wOTQtMTguMjk5LDIuMDk0Yy00LjAwMiwwLTguMjg1LTAuNjUyLTEyLjg0OC0xLjk1N2wtMC4xMzktMC4yNzdjMC4yNzctMS43NywwLjk3OS01LjEyMSwyLjA5NC0xMC4wNTcKCQkJCWM5LjQ5OCwxLjc3LDE0Ljk5LDIuNjU0LDE2LjQ4MSwyLjY1NGM1LjM5OSwwLDEwLjI4NS0wLjk3OSwxNC42NjQtMi45MzJjNS41ODYtMi42MDUsOC4zMzItNi4yMzgsOC4yNC0xMC44OTgKCQkJCWMtMC4xODgtNC4yODEtMy40NDctNy41MzktOS43NzUtOS43NzNjLTUuOTYxLTEuOTU3LTExLjg3My0zLjkxLTE3LjczOC01Ljg2N2MtNi40MjQtMy4xNjQtOS43MjktOC4xLTkuOTEzLTE0LjgwMQoJCQkJYy0wLjE5LTcuOTE0LDMuNjI5LTEzLjgzLDExLjQ0OS0xNy43NGM2LjE0Ni0yLjk3OSwxMy43MzMtNC40NzEsMjIuNzY2LTQuNDcxYzUuMzk5LDAsMTAuMjQxLDAuNzAzLDE0LjUyNiwyLjA5NmwwLjEzNywwLjI4MwoJCQkJQzY5Ni4xMTUsMzgwLjQxMSw2OTUuNzg5LDM4My42MjYsNjk1LjMyNCwzODcuOTAzeiIvPgoJCQk8cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTc3OC41NjIsNDE4LjA3MWMwLDE3LjEzNSwwLjA0NCwyNi43NzEsMC4xMzksMjguOTEybC0wLjQxOSwwLjk4Yy0yLjE0NC0wLjA5OC00LjY1Ni0wLjg4NS03LjU0Mi0yLjM3OQoJCQkJYy0yLjIzMy0xLjExMy00LjQ2OS0yLjI3Ny02LjcwNC0zLjQ5Yy03LjQ0OSw0LjQ2OS0xNC4xOTksNi43MDMtMjAuMjUxLDYuNzAzYy05LjAzMSwwLTE2LjM0LTIuOTc3LTIxLjkyOC04LjkzNgoJCQkJYy01LjQtNS42OC04LjIzOC0xMy4wNzgtOC41MTgtMjIuMjA5Yy0wLjQ2OS0xMy4xMjcsMy41ODMtMjMuMzIsMTIuMTQ5LTMwLjU4NGM3LjkxNS02LjYwOSwxOC41MjYtOS45MTQsMzEuODQzLTkuOTE0CgkJCQljNy41NDMsMCwxMi44MDIsMC42OTcsMTUuNzgzLDIuMDk0YzMuNzIzLDEuNzY2LDUuNjgsNS4xNjYsNS44NjUsMTAuMTkzYzAsMC42NTItMC4wNDksNC43NTItMC4xNDEsMTIuMjkxCgkJCQlDNzc4LjY1Myw0MTAuMDI0LDc3OC41NjIsNDE1LjQ3LDc3OC41NjIsNDE4LjA3MXogTTc1Ny4zMzIsMzg1LjUzYy05LjY4NC0wLjQ2MS0xNy4xNTYsMi4xNjYtMjIuNDE1LDcuODk1CgkJCQljLTUuMjYzLDUuNzI3LTcuNzA2LDEzLjU2OC03LjMzMywyMy41MzFjMC4xODYsNi41MTgsMS44NjEsMTEuNzc5LDUuMDI3LDE1Ljc4M2MzLjQ0NCw0LjQ3MSw4LjI4Nyw2LjcwNSwxNC41MjYsNi43MDUKCQkJCWM1Ljk1NywwLDExLjczMS0yLjI4MSwxNy4zMTctNi44NDZjMC4zNzEtMjMuMTgyLDAuNTYtMzYuNzc1LDAuNTYtNDAuNzc5Yy0wLjA5NS0xLjMwMy0wLjc0Ni0yLjYwOS0xLjk1NS0zLjkxNgoJCQkJQzc2MS40NzQsMzg2LjQxNyw3NTkuNTY2LDM4NS42Myw3NTcuMzMyLDM4NS41M3oiLz4KCQkJPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik04MTkuNzU5LDM1OC4yOThjLTAuNDY2LDMuMDc0LTAuNzksOS42MzUtMC45NzcsMTkuNjkxYzMuODE2LDAsOS41ODgtMC4wOTIsMTcuMzE4LTAuMjc3CgkJCQljLTAuMjc4LDIuNDE4LTAuNDY3LDUuMjA1LTAuNTU5LDguMzYxYy0zLjUzOSwwLTkuMDMxLDAuMDQ3LTE2LjQ4LDAuMTQxbC0wLjQxNyw0My43N2MwLDQuMjczLDEuNTgxLDcuMzg1LDQuNzQ3LDkuMzM2CgkJCQljMi42OTksMS43Nyw3LjAyOSwyLjg4MywxMi45OSwzLjM0OGwtMC4yODEsNC42Yy0yLjk4LDAuNjQ4LTUuOTU5LDAuOTc3LTguOTM4LDAuOTc3Yy0xNC40MzUsMC0yMS43ODktNS4yMDUtMjIuMDY4LTE1LjYwOQoJCQkJbC0wLjEzOS00Ni4yNjRoLTExLjU5MmwwLjE0LTAuNTU3bDEuMzk2LTYuNTY0bDEwLjE5NS0xLjgybDAuNDItMTYuMTk3TDgxOS43NTksMzU4LjI5OHoiLz4KCQkJPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik04NjkuNjIxLDM3Ni41OTdjLTEuNjc4LDI0Ljg1OS0yLjA0OSw0OC4yMjktMS4xMTksNzAuMTA3Yy01LjM5NywwLjE4Ni0xMC4zMzQsMC40Mi0xNC44MDUsMC42OTkKCQkJCWMxLjIxMS0xOC4xNTgsMS42NzgtMzUuMTAyLDEuMzk4LTUwLjgzOGMtMC4wOTMtNi43MDEtMC40MTgtMTIuNDI4LTAuOTc5LTE3LjE3NmM1Ljk1OC0xLjAyNSwxMS4wODEtMi4wMDQsMTUuMzYzLTIuOTM2CgkJCQlMODY5LjYyMSwzNzYuNTk3eiBNODY4LjM2MSwzNjIuMDY5bC0wLjk3NiwwLjg0MmMtMi4xNDIsMC4zNzMtNS40MDEsMC44MzQtOS43NzYsMS4zOTNjMC45My0zLjgxNiwyLTkuNjM3LDMuMjEyLTE3LjQ1NwoJCQkJYzMuMjU5LTAuMDk0LDguMTAyLTAuMzI0LDE0LjUyNC0wLjY5N0w4NjguMzYxLDM2Mi4wNjl6Ii8+CgkJCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNOTQ4LjgwNiwzNzcuNDI5Yy04LjQ3MiwyMC43Ny0xNi45OTIsNDMuNjI3LTI1LjU1Nyw2OC41NzZsLTAuNDIsMC40MjIKCQkJCWMtMS4zOTcsMC4wOTItNy41NCwwLjYwNC0xOC40MzUsMS41MzdsLTAuNDIxLTAuNDJjLTguNjU4LTI5LjYwNy0xNi4wNTktNTIuNzk1LTIyLjIwNi02OS41NTUKCQkJCWM1LjEyLTAuMzY5LDEwLjMzNy0wLjgzNCwxNS42NDQtMS4zOTNsMC41NTgsMC4yNzdjMS45NTYsNy44Miw0Ljc5NSwxNy45MjQsOC41MjEsMzAuMzAzYzUuMjExLDE3Ljg4MSw4LjE0NiwyNy45MzYsOC44LDMwLjE3CgkJCQljNC43NDUtMTMuMTI1LDExLjM1OC0zMi45MTIsMTkuODI5LTU5LjM1N2wwLjQyMS0wLjI3N0M5MzkuNjM0LDM3Ny43MTIsOTQ0LjA1OCwzNzcuNjIsOTQ4LjgwNiwzNzcuNDI5eiIvPgoJCQk8cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTk1MS41OTksNDE1Ljg0MWMtMC40NjctMTIuMTk1LDIuNTYxLTIxLjc4OSw5LjA3Ny0yOC43NzFjNi41MTgtNi45ODIsMTYuMDYyLTEwLjQ3MywyOC42My0xMC40NzMKCQkJCWMxMC42MTYsMCwxOC45MDIsMi45MzIsMjQuODYyLDguNzk5YzUuNjgsNS43NzMsOC43MDQsMTMuNzc5LDkuMDc3LDI0LjAyMWMwLjQ2NiwxMi4yODctMi4zMjgsMjEuODM2LTguMzgzLDI4LjYyOQoJCQkJYy02LjQyMiw3LjI2Mi0xNS44NzMsMTAuODkxLTI4LjM0NywxMC44OTFjLTEwLjg5NiwwLTE5LjM0My0yLjg3OS0yNS4zNS04LjY1NEM5NTUuMTYsNDM0LjUwOSw5NTEuOTcsNDI2LjM2Miw5NTEuNTk5LDQxNS44NDF6CgkJCQkgTTk4OC4wNDksMzg0LjEzOGMtMTUuNDU2LDAtMjIuODEyLDEwLjk0MS0yMi4wNjUsMzIuODE4YzAuMjc4LDYuODkzLDEuOTU2LDEyLjUyNSw1LjAyNywxNi45MDIKCQkJCWMzLjcyNCw1LjExOSw4LjkzOCw3LjY4LDE1LjY0NCw3LjY4YzE1LjU0OCwwLDIyLjk1LTEwLjA1NSwyMi4yMDYtMzAuMTY4QzEwMDguMjA4LDM5My4yMTIsMTAwMS4yNzEsMzg0LjEzOCw5ODguMDQ5LDM4NC4xMzh6IgoJCQkJLz4KCQk8L2c+CgkJPGc+CgkJCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNNjc0LjYwNCwyNzUuMzM1Yy0xMC42MTYsMi42MDctMjYuNjMxLDYuNDc1LTQ4LjA0NiwxMS41OTRjMS4yMDksMTcuMTI5LDkuNjg1LDI1LjY5NywyNS40MTgsMjUuNjk3CgkJCQljOC4yODcsMCwxNi4zNC0yLjkzMiwyNC4xNjMtOC43OTljLTAuNDY4LDMuMjYyLTAuNzkzLDYuOTgyLTAuOTc5LDExLjE3MmMtMS45NTUsMS44NjctNS45NTksMy40MDItMTIuMDExLDQuNjExCgkJCQljLTQuOTM1LDEuMDIxLTkuMzU4LDEuNTM3LTEzLjI2OCwxLjUzN2MtMTEuMDgxLDAtMTkuOTI3LTIuNzQ2LTI2LjUzOC04LjI0NGMtNy4wNzUtNS42NzgtMTAuODAyLTEzLjgyNC0xMS4xNzMtMjQuNDM2CgkJCQljLTAuMzcxLTExLjU0NywyLjQ2OC0yMS4wOTMsOC41MjEtMjguNjM1YzYuNjA5LTguMDk4LDE1Ljc4My0xMi4xNDgsMjcuNTEzLTEyLjE0OGM3LjU0MiwwLDE0LjA4MiwxLjg4NSwxOS42MjMsNS42NTIKCQkJCWM1LjUzOSwzLjc3Miw5LjUxOCw5LjEwNSwxMS45NDEsMTUuOTk0QzY3OC44MzgsMjcwLjgyMSw2NzcuMTE3LDI3Mi44MjMsNjc0LjYwNCwyNzUuMzM1eiBNNjQ3LjUwNiwyNTUuMDg3CgkJCQljLTEwLjQyOCwwLTE3LjY5LDcuNTg3LTIxLjc4NiwyMi43NjNsMzkuNTI0LTguNzk4QzY1OS42NTksMjU5Ljc0NSw2NTMuNzQ1LDI1NS4wODcsNjQ3LjUwNiwyNTUuMDg3eiIvPgoJCQk8cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTczOC44NDcsMjYwLjI1M2MtNS4yMTUtMi41MTQtMTAuNTY4LTMuNzczLTE2LjA2MS0zLjc3M2MtNC4xOTEsMC03LjkxNiwwLjc1MS0xMS4xNzQsMi4yMzcKCQkJCWMtNC4wOTgsMS45NTYtNi4xLDQuNjU1LTYuMDA3LDguMTAxYzAuMDkzLDQuNDY4LDMuNCw3LjcyNyw5LjkxNyw5Ljc3NmM2LjE0NSwxLjg2NiwxMi4yNCwzLjcyNiwxOC4yOTUsNS41ODcKCQkJCWM2LjYxMSwzLjE2NiwxMC4wMSw4LjM3NywxMC4xOTYsMTUuNjQxYzAuMTg2LDYuMTQ2LTIuOTc5LDExLjg3My05LjQ5NywxNy4xNzhjLTMuODE4LDMuMTY2LTkuMjY2LDUuNTg4LTE2LjM0LDcuMjY0CgkJCQljLTYuMDU0LDEuMzk4LTEyLjE1LDIuMDk2LTE4LjI5NywyLjA5NmMtNC4wMDQsMC04LjI4OC0wLjY1NC0xMi44NDctMS45NTNsLTAuMTQtMC4yODFjMC4yNzctMS43NywwLjk3Ny01LjEyMSwyLjA5NS0xMC4wNTcKCQkJCWM5LjQ5NSwxLjc3LDE0Ljk4NywyLjY1NCwxNi40NzgsMi42NTRjNS40LDAsMTAuMjg5LTAuOTgsMTQuNjY2LTIuOTMyYzUuNTg3LTIuNjA3LDguMzMxLTYuMjQsOC4yMzgtMTAuODkzCgkJCQljLTAuMTg2LTQuMjg1LTMuNDQzLTcuNTQ3LTkuNzc1LTkuNzc5Yy01Ljk1OS0xLjk1NS0xMS44NzEtMy45MS0xNy43MzgtNS44NjVjLTYuNDI0LTMuMTY2LTkuNzI4LTguMDk5LTkuOTE0LTE0LjgwMwoJCQkJYy0wLjE4OC03LjkxNiwzLjYzMS0xMy44MjcsMTEuNDUxLTE3LjczN2M2LjE0Ni0yLjk3OSwxMy43MzItNC40NzEsMjIuNzY2LTQuNDcxYzUuMzk4LDAsMTAuMjQyLDAuNjk4LDE0LjUyNSwyLjA5MWwwLjEzOSwwLjI4MwoJCQkJQzczOS42MzcsMjUyLjc2LDczOS4zMTIsMjU1Ljk3Miw3MzguODQ3LDI2MC4yNTN6Ii8+CgkJCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNNzU5LjA5NywyNTAuMzMzbDAuNDE3LTAuMjc0YzUuOTU5LDAuNTU4LDEwLjcwNywyLjAwMywxNC4yNDcsNC4zMzEKCQkJCWM3LjcyNy00LjQ3MSwxNS44MjgtNi43MDUsMjQuMzAxLTYuNzA1YzguNjYsMCwxNS43ODMsMy4wMjUsMjEuMzY3LDkuMDc4YzUuMzA5LDUuODY0LDguMDU1LDEyLjk4Niw4LjI0LDIxLjM3CgkJCQljMC4xODYsMTMuNjg1LTUuNDk0LDI0LjA2NS0xNy4wMzUsMzEuMTQ0Yy05Ljg3MSw2LjE0MS0yMi4yNTYsOC45ODItMzcuMTUyLDguNTIxYy0wLjA5NCwxMC40MjIsMCwxOS43MzYsMC4yNzksMjcuOTI4CgkJCQlsLTAuNDIsMC4yODFsLTE0LjY2NSwxLjgxM2MxLjQ4OS0yNi4yNTYsMi4wMDItNTAuODgxLDEuNTM4LTczLjg4Qzc2MC4wMjUsMjY1LjI3OCw3NTkuNjU0LDI1Ny40MTUsNzU5LjA5NywyNTAuMzMzegoJCQkJIE03OTMuMTc1LDI1Ni4zNDNjLTUuNjgyLDAtMTEuOTY3LDIuMTQ0LTE4Ljg1NSw2LjQyNGMtMC41NTksMTIuMDEyLTAuODM4LDI3Ljg4OS0wLjgzOCw0Ny42MjUKCQkJCWMyLjMyNSwwLjA5NCw0LjA5NiwwLjE0MSw1LjMwNywwLjE0MWMxMC40MjYsMCwxOC43Ni0yLjc2OCwyNC45OTktOC4zMTNjNi4yMzctNS41MzcsOS4yNjUtMTMuMjQyLDkuMDc5LTIzLjExNAoJCQkJYy0wLjA5NC02LjIzNy0xLjcyNS0xMS40NS00Ljg4OS0xNS42NDFDODA0LjM0NywyNTguNzE3LDc5OS40MTEsMjU2LjM0Myw3OTMuMTc1LDI1Ni4zNDN6Ii8+CgkJCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNOTAxLjk3LDI5MC40MTljMCwxNy4xMzEsMC4wNDMsMjYuNzcxLDAuMTQsMjguOTE0bC0wLjQyMSwwLjk3NWMtMi4xNDEtMC4wOTItNC42NTUtMC44ODEtNy41MzktMi4zNzMKCQkJCWMtMi4yMzUtMS4xMTktNC40NzEtMi4yODEtNi43MDctMy40OTJjLTcuNDUxLDQuNDY3LTE0LjE5Nyw2LjcwNS0yMC4yNDksNi43MDVjLTkuMDMyLDAtMTYuMzQzLTIuOTgyLTIxLjkyNi04Ljk0MQoJCQkJYy01LjQwMS01LjY4LTguMjQtMTMuMDc4LTguNTIxLTIyLjIwNWMtMC40NjctMTMuMTI3LDMuNTgyLTIzLjMyNCwxMi4xNS0zMC41ODRjNy45MTQtNi42MSwxOC41MjctOS45MTksMzEuODQ0LTkuOTE5CgkJCQljNy41NDEsMCwxMi44MDEsMC42OTgsMTUuNzc5LDIuMDk0YzMuNzI1LDEuNzcyLDUuNjgsNS4xNzEsNS44NjksMTAuMTk3YzAsMC42NTMtMC4wNTEsNC43NDgtMC4xNDIsMTIuMjg4CgkJCQlDOTAyLjA2MiwyODIuMzY4LDkwMS45NywyODcuODEzLDkwMS45NywyOTAuNDE5eiBNODgwLjc0MiwyNTcuODgyYy05LjY4Ni0wLjQ2Ny0xNy4xNTYsMi4xNjItMjIuNDE2LDcuODg5CgkJCQljLTUuMjY0LDUuNzI0LTcuNzA2LDEzLjU3MS03LjMzMiwyMy41MzVjMC4xODYsNi41MTgsMS44NjEsMTEuNzc3LDUuMDI2LDE1Ljc3OWMzLjQ0NCw0LjQ2OSw4LjI4OSw2LjcwNSwxNC41MjQsNi43MDUKCQkJCWM1Ljk1NywwLDExLjczMi0yLjI4MSwxNy4zMTgtNi44NDRjMC4zNzMtMjMuMTg3LDAuNTYxLTM2Ljc3NywwLjU2MS00MC43ODNjLTAuMDk1LTEuMzAzLTAuNzQ4LTIuNjAyLTEuOTU3LTMuOTEKCQkJCUM4ODQuODg0LDI1OC43NjcsODgyLjk3NCwyNTcuOTcyLDg4MC43NDIsMjU3Ljg4MnoiLz4KCQkJPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik05NTYuMDE5LDMyMC44NjZjLTEuMzA3LDQuMDA0LTMuMDI3LDkuNTQxLTUuMTcsMTYuNjE5bC0wLjQxOCwwLjU2MWMtNC4wOTksMC04Ljc1NCwwLjE0MS0xMy45NjYsMC40MgoJCQkJYzIuNjk4LTQuNDcxLDUuNzcxLTEwLjQzNCw5LjIxOC0xNy44NzljLTguNTY2LTEuMjA3LTE1LjQxLTQuNzUtMjAuNTMtMTAuNjEzYy01LjEyMi01Ljg2NS03Ljg3LTEzLjI2OC04LjI0MS0yMi4yMDcKCQkJCWMtMC4zNzMtMTAuOTg2LDMuMzk2LTIwLjIyNywxMS4zMTMtMjcuNzIzYzcuOTEyLTcuNDkzLDE3LjU5Ny0xMS4yNDYsMjkuMDQ4LTExLjI0NmM2Ljg5MiwwLDEyLjc1NiwwLjg0LDE3LjYsMi41MTcKCQkJCWMtMC4zNzQsMy41NDItMC42NTIsNi42NTctMC44NCw5LjM1OGwtMC41NTcsMC4xMzhjLTQuMTkxLTIuNDE4LTguODkzLTMuNjMtMTQuMTA5LTMuNjNjLTguMzc3LDAtMTUuMjAxLDIuOTgxLTIwLjQ1Nyw4LjkzNgoJCQkJYy01LjI2NSw1Ljk2My03Ljc1MiwxMy4wMzktNy40NzMsMjEuMjMyYzAuMjgsNy4zNTUsMi4zMjYsMTMuMjY2LDYuMTQ2LDE3LjczNmM0LjE4OCw0LjkzNiwxMC4wMDYsNy40LDE3LjQ1NCw3LjQKCQkJCWM2LjYxLDAsMTMuMTMyLTIuNDIsMTkuNTU1LTcuMjZjLTAuMzcyLDQuMzc1LTAuNjUzLDcuODY1LTAuODM5LDEwLjQ3NUM5NzAuMTIyLDMxOC40OTUsOTY0LjIwOSwzMjAuMjE2LDk1Ni4wMTksMzIwLjg2NnoiLz4KCQkJPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik05ODIuODMyLDI4OC4xODVjLTAuNDY2LTEyLjE5NSwyLjU1OS0yMS43ODUsOS4wNzctMjguNzY4YzYuNTE0LTYuOTg0LDE2LjA2MS0xMC40NzcsMjguNjMtMTAuNDc3CgkJCQljMTAuNjEzLDAsMTguODk5LDIuOTMyLDI0Ljg1OSw4Ljc5OWM1LjY4LDUuNzc1LDguNzA3LDEzLjc3OSw5LjA3OCwyNC4wMjFjMC40NjUsMTIuMjk0LTIuMzI2LDIxLjgzNy04LjM4LDI4LjYzMgoJCQkJYy02LjQyMyw3LjI2Mi0xNS44NzQsMTAuODk1LTI4LjM0OSwxMC44OTVjLTEwLjg5OCwwLTE5LjM0NS0yLjg4NS0yNS4zNS04LjY2Qzk4Ni4zOSwzMDYuODUzLDk4My4yMDMsMjk4LjcwOCw5ODIuODMyLDI4OC4xODV6CgkJCQkgTTEwMTkuMjgyLDI1Ni40NzljLTE1LjQ1OCwwLTIyLjgxNCwxMC45NDUtMjIuMDY1LDMyLjgyNmMwLjI3Nyw2Ljg4NSwxLjk1NSwxMi41MjEsNS4wMjcsMTYuODk2CgkJCQljMy43MjUsNS4xMjEsOC45MzcsNy42ODIsMTUuNjQ0LDcuNjgyYzE1LjU0NiwwLDIyLjk0OC0xMC4wNTcsMjIuMjA2LTMwLjE3QzEwMzkuNDM4LDI2NS41NTksMTAzMi41MDMsMjU2LjQ3OSwxMDE5LjI4MiwyNTYuNDc5CgkJCQl6Ii8+CgkJPC9nPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=" alt="espaço sativo">
   </div>
-  <h1>Cannabis<br><em>Medicinal</em></h1>
-  <p>Informação acessível para quem busca o caminho desta medicina milenar</p>
-</div>
-
-<!-- PILLS -->
-<div class="pills">
-  <a class="pill" href="#primeiros-passos">🌱 Primeiros passos</a>
-  <a class="pill" href="#associacoes">🌿 Associações</a>
-  <a class="pill" href="#audiovisual">🎬 Audiovisual</a>
-  <a class="pill" href="#importadores">📦 Importadores</a>
+  <div class="hero-badge">Curadoria de conteúdo</div>
+  <h1>Cannabis <em>Medicinal</em></h1>
+  <p class="hero-sub">Informação acessível para quem busca o caminho desta medicina milenar</p>
 </div>
 
 <!-- PRIMEIROS PASSOS -->
 <section id="primeiros-passos">
-  <div class="section-title">Primeiros passos com a cannabis medicinal</div>
-  <p style="font-size:13px; color:#7a9080; font-style:italic; margin-bottom:20px;">Dúvidas sobre produtos a base de cannabis? Nada melhor que o empoderamento.</p>
+  <div class="sec-label">Orientação</div>
+  <div class="sec-title">Primeiros passos</div>
+  <div class="accordion">
 
-  <div class="passos-grid">
-
-    <div class="passo-card">
-      <div class="passo-q" onclick="togglePasso(this)">
+    <div class="acc-item">
+      <button class="acc-trigger" aria-expanded="false">
         Onde posso comprar?
-        <span class="passo-toggle">+</span>
-      </div>
-      <div class="passo-body">
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">
         <ul>
           <li><strong>Farmácias</strong> — já estão disponíveis alguns produtos, principalmente isolados ricos em canabidiol. Têm pronta entrega e certificado de análise, porém a custo mais alto.</li>
           <li><strong>Associações</strong> — o associativismo é responsável pelo grande aumento no acesso. Podem ser mais acessíveis, mas com concentrações variáveis entre lotes.</li>
           <li><strong>Importados</strong> — empresas com representação de marcas consagradas do exterior, que oferecem certificado de análise e suporte jurídico para a importação.</li>
         </ul>
-        <div class="nota">Garantia de qualidade, preço e frete são as variáveis que precisamos avaliar em cada caso.</div>
+        <p style="margin-top:12px;">Garantia de qualidade, preço e frete são as variáveis que precisamos avaliar em cada caso.</p>
       </div>
     </div>
 
-    <div class="passo-card">
-      <div class="passo-q" onclick="togglePasso(this)">
+    <div class="acc-item">
+      <button class="acc-trigger" aria-expanded="false">
         Qual o preço do tratamento?
-        <span class="passo-toggle">+</span>
-      </div>
-      <div class="passo-body">
-        <p>Uma referência prática é o índice de <strong><a href="https://veja.abril.com.br/coluna/cannabiz/medicamentos-nacionais-de-cannabis-nao-sao-mais-baratos-que-os-importados/" target="_blank" rel="noopener" style="color:var(--verde);text-decoration:underline;text-underline-offset:3px;">valor em reais por mg de cannabinoide</a></strong>, que simplifica a comparação entre produtos de diferentes fornecedores.</p>
-        <div class="nota">Sinta-se livre para tomar a sua decisão com base nas suas necessidades, acessibilidade e orientação médica.</div>
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">
+        <p>Uma referência prática é o índice de <a href="https://veja.abril.com.br/coluna/cannabiz/medicamentos-nacionais-de-cannabis-nao-sao-mais-baratos-que-os-importados/" target="_blank" rel="noopener">valor em reais por mg de cannabinoide</a>, que simplifica a comparação entre produtos de diferentes fornecedores.</p>
+        <p>Sinta-se livre para tomar a sua decisão com base nas suas necessidades, acessibilidade e orientação médica.</p>
       </div>
     </div>
 
-    <div class="passo-card">
-      <div class="passo-q" onclick="togglePasso(this)">
+    <div class="acc-item">
+      <button class="acc-trigger" aria-expanded="false">
         Como iniciar o tratamento?
-        <span class="passo-toggle">+</span>
-      </div>
-      <div class="passo-body">
+        <span class="acc-icon">+</span>
+      </button>
+      <div class="acc-body">
         <ul>
           <li><strong>Iniciar</strong> — siga a prescrição e evite fazer mais de uma intervenção ao mesmo tempo.</li>
           <li><strong>Dose</strong> — aumente gradualmente. A máxima da cannabis medicinal: <em>inicie baixo, mantenha baixo e siga baixo.</em></li>
@@ -277,251 +237,126 @@
 
 <!-- ASSOCIAÇÕES -->
 <section id="associacoes">
-  <div class="section-title">Associações Cannábicas no Brasil</div>
-  <p style="font-size:13px; color:#7a9080; font-style:italic; margin-bottom:4px;">Organizadas por regiões. Associações com site têm link direto (↗).</p>
-
-  <!-- NORTE -->
-  <div class="regiao-titulo">Norte</div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">RO — Rondônia</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">ACAMERO</span>
-      <span class="assoc-tag">Assoc. Canábica de Ji-Paraná</span>
+  <div class="sec-label">Comunidade</div>
+  <div class="sec-title">Associações Cannábicas</div>
+  <a class="hub-card card-assoc" href="./associacoes/">
+    <div class="hub-accent"></div>
+    <div class="hub-body">
+      <div>
+        <div class="hub-label">Base colaborativa</div>
+        <div class="hub-title">Ver todas as associações</div>
+        <div class="hub-desc">49 organizações em 5 regiões · busca por nome e estado · atualização contínua</div>
+      </div>
+      <div class="hub-arrow">→</div>
     </div>
-  </div>
-
-  <!-- NORDESTE -->
-  <div class="regiao-titulo">Nordeste</div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">CE — Ceará</div>
-    <div class="assoc-grid">
-      <a class="assoc-tag link" href="https://www.abracam.org/" target="_blank">ABRACAM</a>
-      <a class="assoc-tag link" href="https://acurabr.com.br/" target="_blank">Acura</a>
-      <span class="assoc-tag">Adapta</span>
-      <span class="assoc-tag">Amece</span>
-      <span class="assoc-tag">SATIVOTECA</span>
-      <span class="assoc-tag">Flor de Kaneh</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">PB — Paraíba</div>
-    <div class="assoc-grid">
-      <a class="assoc-tag link" href="https://abraceesperanca.org.br/home/" target="_blank">ABRACE</a>
-      <span class="assoc-tag">AMPARA</span>
-      <span class="assoc-tag">LIGA CANÁBICA</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">PE — Pernambuco</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">AMME</span>
-      <span class="assoc-tag">CANNAPE</span>
-      <span class="assoc-tag">Coletivo Mães Independentes</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">SE — Sergipe</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">ABACCANS</span>
-    </div>
-  </div>
-
-  <!-- CENTRO-OESTE -->
-  <div class="regiao-titulo">Centro-Oeste</div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">GO — Goiás</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">ACALME — Luz Medicinal</span>
-      <span class="assoc-tag">Instituto Kannè</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">MS — Mato Grosso do Sul</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">Divina Flor</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">MT — Mato Grosso</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">Mov. Mães Canábicas de Rondonópolis</span>
-    </div>
-  </div>
-
-  <!-- SUDESTE -->
-  <div class="regiao-titulo">Sudeste</div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">SP — São Paulo</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">ABRACUCA</span>
-      <span class="assoc-tag">Acalme Brasil</span>
-      <span class="assoc-tag">ACAMPA</span>
-      <span class="assoc-tag">ACUCASEMA</span>
-      <span class="assoc-tag">ACuCa</span>
-      <span class="assoc-tag">ACCURA</span>
-      <span class="assoc-tag">Assoc. Padre Ticão</span>
-      <span class="assoc-tag">Assoc. Canábica Campinas</span>
-      <a class="assoc-tag link" href="https://cultive.org.br/a-cultive-associacao/" target="_blank">CULTIVE</a>
-      <span class="assoc-tag">FLOR DA VIDA</span>
-      <a class="assoc-tag link" href="https://www.maleli.org.br/" target="_blank">MALÉLI</a>
-      <span class="assoc-tag">PRÓ-VIDA</span>
-      <a class="assoc-tag link" href="https://sbec.med.br/" target="_blank">SBEC / Mães Jardineiras</a>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">RJ — Rio de Janeiro</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">Assoc. Dr Hemp</span>
-      <span class="assoc-tag">Mãesconha</span>
-      <span class="assoc-tag">AMACANNABIS</span>
-      <a class="assoc-tag link" href="https://abrario.org/" target="_blank">Abrario</a>
-      <a class="assoc-tag link" href="https://www.apepi.org/" target="_blank">APEPI</a>
-      <span class="assoc-tag">Assoc. Humanitária Canábica</span>
-      <span class="assoc-tag">Canapse</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">MG — Minas Gerais</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">ACMT — Triângulo Mineiro</span>
-      <span class="assoc-tag">Flor de Cannabis Medicinal</span>
-      <span class="assoc-tag">AMA+ME</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">ES — Espírito Santo</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">Coletivo ES Cannabis Medicinal</span>
-    </div>
-  </div>
-
-  <!-- SUL -->
-  <div class="regiao-titulo">Sul</div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">PR — Paraná</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">ACANPA</span>
-      <span class="assoc-tag">ACASF</span>
-      <span class="assoc-tag">FLORESCER</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">RS — Rio Grande do Sul</div>
-    <div class="assoc-grid">
-      <span class="assoc-tag">ACS Porto Alegre</span>
-      <span class="assoc-tag">Agapec Pelotas</span>
-    </div>
-  </div>
-  <div class="estado-grupo">
-    <div class="estado-titulo">SC — Santa Catarina</div>
-    <div class="assoc-grid">
-      <a class="assoc-tag link" href="https://associacaoalternativa.com.br/" target="_blank">ALTERNATIVA</a>
-      <a class="assoc-tag link" href="https://santacannabis.com.br/" target="_blank">SANTA CANNABIS</a>
-    </div>
-  </div>
-
+  </a>
 </section>
 
 <!-- AUDIOVISUAL -->
 <section id="audiovisual">
-  <div class="section-label">Curadoria de conteúdo</div>
-  <div class="section-title">Audiovisual em destaque</div>
+  <div class="sec-label">Curadoria</div>
+  <div class="sec-title">Audiovisual em destaque</div>
+  <div class="audio-grid">
 
-  <a class="av-card" href="https://www.youtube.com/results?search_query=MovReCam+UNIFESP" target="_blank" rel="noopener">
-    <div class="av-icon">🎓</div>
-    <div class="av-info">
-      <div class="av-title">MovReCam — UNIFESP</div>
-      <div class="av-desc">Curso gratuito de extensão sobre cannabis medicinal</div>
-      <div class="av-plat">YouTube · Gratuito</div>
-    </div>
-    <div class="av-arrow">→</div>
-  </a>
+    <a class="audio-card" href="https://www.youtube.com/results?search_query=MovReCam+UNIFESP" target="_blank" rel="noopener">
+      <div class="audio-num"><span>🎓</span></div>
+      <div class="audio-info">
+        <div class="audio-plat">YouTube · Gratuito</div>
+        <div class="audio-titulo">MovReCam — UNIFESP</div>
+        <div class="audio-desc">Curso gratuito de extensão sobre cannabis medicinal</div>
+      </div>
+      <div class="audio-acao"><span class="audio-btn">Assistir →</span></div>
+    </a>
 
-  <a class="av-card" href="https://www.youtube.com/results?search_query=Curando+Ivo+Alzheimer+cannabis" target="_blank" rel="noopener">
-    <div class="av-icon">🎬</div>
-    <div class="av-info">
-      <div class="av-title">Curando Ivo</div>
-      <div class="av-desc">Relato da jornada do Seu Ivo, portador de Alzheimer</div>
-      <div class="av-plat">YouTube · Documentário</div>
-    </div>
-    <div class="av-arrow">→</div>
-  </a>
+    <a class="audio-card" href="https://www.youtube.com/results?search_query=Curando+Ivo+Alzheimer+cannabis" target="_blank" rel="noopener">
+      <div class="audio-num"><span>🎬</span></div>
+      <div class="audio-info">
+        <div class="audio-plat">YouTube · Documentário</div>
+        <div class="audio-titulo">Curando Ivo</div>
+        <div class="audio-desc">Relato da jornada do Seu Ivo, portador de Alzheimer</div>
+      </div>
+      <div class="audio-acao"><span class="audio-btn">Assistir →</span></div>
+    </a>
 
-  <a class="av-card" href="https://www.netflix.com" target="_blank" rel="noopener">
-    <div class="av-icon">🎥</div>
-    <div class="av-info">
-      <div class="av-title">Baseado em Fatos Raciais</div>
-      <div class="av-desc">Documentário sobre raça, cannabis e políticas públicas</div>
-      <div class="av-plat">Netflix</div>
-    </div>
-    <div class="av-arrow">→</div>
-  </a>
+    <a class="audio-card" href="https://www.netflix.com" target="_blank" rel="noopener">
+      <div class="audio-num"><span>🎥</span></div>
+      <div class="audio-info">
+        <div class="audio-plat">Netflix</div>
+        <div class="audio-titulo">Baseado em Fatos Raciais</div>
+        <div class="audio-desc">Documentário sobre raça, cannabis e políticas públicas</div>
+      </div>
+      <div class="audio-acao"><span class="audio-btn">Assistir →</span></div>
+    </a>
 
-  <a class="av-card" href="https://www.youtube.com/results?search_query=O+Cientista+Raphael+Mechoulam" target="_blank" rel="noopener">
-    <div class="av-icon">🔬</div>
-    <div class="av-info">
-      <div class="av-title">O Cientista</div>
-      <div class="av-desc">Documentário sobre o Dr. Raphael Mechoulam, candidato ao Nobel</div>
-      <div class="av-plat">YouTube · Documentário</div>
-    </div>
-    <div class="av-arrow">→</div>
-  </a>
+    <a class="audio-card" href="https://www.youtube.com/results?search_query=O+Cientista+Raphael+Mechoulam" target="_blank" rel="noopener">
+      <div class="audio-num"><span>🔬</span></div>
+      <div class="audio-info">
+        <div class="audio-plat">YouTube · Documentário</div>
+        <div class="audio-titulo">O Cientista</div>
+        <div class="audio-desc">Documentário sobre o Dr. Raphael Mechoulam, candidato ao Nobel</div>
+      </div>
+      <div class="audio-acao"><span class="audio-btn">Assistir →</span></div>
+    </a>
 
-    <a class="av-card" href="https://www.youtube.com/watch?app=desktop&v=0kCZN_zjzGA" target="_blank" rel="noopener">
-    <div class="av-icon">🧠</div>
-    <div class="av-info">
-      <div class="av-title">Parkinson e Cannabis</div>
-      <div class="av-desc">Relato de capitão de polícia aposentado com mais de 19 anos de diagnóstico com a doença de Parkinson</div>
-      <div class="av-plat">YouTube · Documentário</div>
-    </div>
-    <div class="av-arrow">→</div>
-  </a>
+    <a class="audio-card" href="https://www.youtube.com/watch?v=0kCZN_zjzGA" target="_blank" rel="noopener">
+      <div class="audio-num"><span>🧠</span></div>
+      <div class="audio-info">
+        <div class="audio-plat">YouTube · Documentário</div>
+        <div class="audio-titulo">Parkinson e Cannabis</div>
+        <div class="audio-desc">Relato de capitão de polícia aposentado com mais de 19 anos de diagnóstico</div>
+      </div>
+      <div class="audio-acao"><span class="audio-btn">Assistir →</span></div>
+    </a>
 
-  <a class="av-card" href="https://www.youtube.com/results?search_query=Dirijo+cannabis+indigena" target="_blank" rel="noopener">
-    <div class="av-icon">🌿</div>
-    <div class="av-info">
-      <div class="av-title">Dirijo</div>
-      <div class="av-desc">Relatos indígenas sobre o uso tradicional da planta</div>
-      <div class="av-plat">YouTube · Documentário</div>
-    </div>
-    <div class="av-arrow">→</div>
-  </a>
+    <a class="audio-card" href="https://www.youtube.com/results?search_query=Dirijo+cannabis+indigena" target="_blank" rel="noopener">
+      <div class="audio-num"><span>🌿</span></div>
+      <div class="audio-info">
+        <div class="audio-plat">YouTube · Documentário</div>
+        <div class="audio-titulo">Dirijo</div>
+        <div class="audio-desc">Relatos indígenas sobre o uso tradicional da planta</div>
+      </div>
+      <div class="audio-acao"><span class="audio-btn">Assistir →</span></div>
+    </a>
+
+  </div>
 </section>
 
 <!-- IMPORTADORES -->
 <section id="importadores">
-  <div class="section-title">Empresas importadoras</div>
-  <p style="font-size:13px; color:#7a9080; font-style:italic; margin-bottom:20px;">Com certificado de análise e suporte jurídico para importação.</p>
+  <div class="sec-label">Empresas</div>
+  <div class="sec-title">Importadores</div>
   <div class="import-grid">
     <a class="import-card" href="https://cannect.life/" target="_blank" rel="noopener">
-      <span class="import-name">Cannect</span><span class="import-arrow">↗</span>
+      <span class="import-nome">Cannect</span><span class="import-arrow">↗</span>
     </a>
     <a class="import-card" href="https://canteramed.com/" target="_blank" rel="noopener">
-      <span class="import-name">Canteramed</span><span class="import-arrow">↗</span>
+      <span class="import-nome">Canteramed</span><span class="import-arrow">↗</span>
     </a>
     <a class="import-card" href="https://farmausa.com/" target="_blank" rel="noopener">
-      <span class="import-name">Farmausa</span><span class="import-arrow">↗</span>
+      <span class="import-nome">Farmausa</span><span class="import-arrow">↗</span>
     </a>
     <a class="import-card" href="https://hempmedsbr.com/" target="_blank" rel="noopener">
-      <span class="import-name">HempMeds BR</span><span class="import-arrow">↗</span>
+      <span class="import-nome">HempMeds BR</span><span class="import-arrow">↗</span>
     </a>
     <a class="import-card" href="https://www.usahempbrasil.com/" target="_blank" rel="noopener">
-      <span class="import-name">USA Hemp Brasil</span><span class="import-arrow">↗</span>
+      <span class="import-nome">USA Hemp Brasil</span><span class="import-arrow">↗</span>
     </a>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <a href="https://e-sativo.github.io">← Voltar ao Espaço Sativo</a>
-  <p>Espaço Sativo · Cannabis Medicinal 🌿</p>
+  <a href="https://e-sativo.github.io">← voltar ao espaço sativo</a>
+  <p>Cannabis Medicinal · espaço sativo 🌿</p>
 </footer>
 
 <script>
-  function togglePasso(el) {
-    el.classList.toggle('open');
-    el.nextElementSibling.classList.toggle('show');
-  }
+document.querySelectorAll('.acc-trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+    btn.nextElementSibling.classList.toggle('aberto', !expanded);
+  });
+});
 </script>
 </body>
 </html>
